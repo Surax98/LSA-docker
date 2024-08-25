@@ -11,13 +11,13 @@ docker run \
 	--volume /DataDir:/opt/lsi/LSIStorageAuthority/conf \
 	--publish 2463:2463 \
 	--publish 9000:9000 \
-	--env TZ=America/New_York \
+	--env TZ=Europe/Rome \
 	--env ROOT_PASSWORD="password" \
 	--env ADD_USERS_RW="readWriteUser:password user2:password" \
 	--env ADD_USERS_RO="readOnlyUser:password" \
 	--env WEB_PORT=2463 \
 	--env LSA_PORT=9000 \
-	mecjay12/lsa
+	surax98/lsa
 ```
 
 ### Docker Compose
@@ -33,13 +33,13 @@ services:
       - 2463:2463
       - 9000:9000
     environment:
-      - TZ=America/New_York
+      - TZ=Europe/Rome
       - ROOT_PASSWORD=password
       - ADD_USERS_RW=readWriteUser:password user2:password
       - ADD_USERS_RO=readOnlyUser:password
       - WEB_PORT=2463
       - LSA_PORT=9000
-    image: mecjay12/lsa
+    image: surax98/lsa
 ```
 
 ### Command Reference
@@ -97,7 +97,7 @@ services:
 			<th align=left><pre>ports:<br>- 9000:9000</pre></th>
 		</tr>
 		<tr>
-			<th align=left><pre>--env TZ=America/New_York</pre></th>
+			<th align=left><pre>--env TZ=Europe/Rome</pre></th>
 			<th rowspan=2>Optional</th>
 			<th rowspan=2>Sets timezone inside the container.</th>
 		</tr>
@@ -145,12 +145,12 @@ services:
 			<th align=left><pre>environment:<br>- LSA_PORT=9000</pre></th>
 		</tr>
 		<tr>
-			<th align=left><pre>mecjay12/lsa</pre></th>
+			<th align=left><pre>surax98/lsa</pre></th>
 			<th rowspan=2>All</th>
 			<th rowspan=2>Pulls the latest stable version of this container.</th>
 		</tr>
 		<tr>
-			<th align=left><pre>image: mecjay12/lsa</pre></th>
+			<th align=left><pre>image: surax98/lsa</pre></th>
 		</tr>
 	</tbody>
 </table>
@@ -159,14 +159,6 @@ services:
 
 ## Links
 
-[Docker Hub](https://hub.docker.com/repository/docker/mecjay12/lsa/general)
+[Docker Hub](https://hub.docker.com/repository/docker/surax98/lsa/general)
 
-[GitHub](https://github.com/MeCJay12/lsi-storage-authority/)
-
-## Change Log
-
-### 8/15/2024
-- Fixed a bug in entrypoint.sh that overwrote newer versions of LSA on upgrade with a mounted config. Please add /conf to the end of your mount point if upgrading from a previous version.
-- Added LSA 007.020.016.000 and 007.019.006.000.
-### 4/17/2024
-- Inital commit with version 007.018.004.000 of LSA on Ubuntu.
+[GitHub](https://github.com/surax98/lsa-docker/)
