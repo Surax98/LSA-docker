@@ -17,6 +17,7 @@ docker run \
 	--env ADD_USERS_RO="readOnlyUser:password" \
 	--env WEB_PORT=2463 \
 	--env LSA_PORT=9000 \
+	--restart unless-stopped \
 	surax98/lsa
 ```
 
@@ -40,6 +41,7 @@ services:
       - WEB_PORT=2463
       - LSA_PORT=9000
     image: surax98/lsa
+    restart: unless-stopped
 ```
 
 ### Command Reference
