@@ -1,6 +1,45 @@
 # Dockerized LSI Storage Authority
 LSI Storage Authority (LSA) is the successor to MegaRaid Storage Manager (MSM) for managing MegaRAID cards from inside the OS. LSA improves on MSM by including a web server instead of the old MSM java client that was run locally. LSA features both local and remote server management from one interface.
 
+## Building the Container
+
+### Version Detection Methods
+
+The build process supports three methods for determining which LSA version to download:
+
+#### Method 1: Auto-Detection with Selenium (Recommended) ⭐
+
+To automatically detect the latest version from Broadcom's JavaScript-rendered download page, enable Selenium:
+
+```bash
+docker build --build-arg USE_SELENIUM=true -t <IMAGE_TAG> .
+```
+
+The version format should match Broadcom's naming convention: `XXX.XXX.XXX.XXX_MRXX.XX`
+
+#### Method 2: Specify Version
+
+The most reliable method is to specify the exact version you want:
+
+```bash
+docker build --build-arg LSA_VERSION=008.014.012.000_MR7.34 -t <IMAGE_TAG> .
+```
+
+**Requirements:**
+- Scrapes the Broadcom download page to find the latest version
+- May break if Broadcom changes their website structure
+
+**Default fallback version:** `008.014.012.000_MR7.34`
+
+### Testing Version Detection
+
+You can test the version detection script locally:
+
+```bash
+# Test with fallback (no dependencies)
+python3 get_latest_version.py
+```
+
 ## Using the Container
 ### Docker Run
 
@@ -163,6 +202,10 @@ services:
 [GitHub](https://github.com/MeCJay12/lsi-storage-authority/)
 
 ## Change Log
+
+### 10/21/2025
+- Added automatic version detection script (`get_latest_version.py`) that finds and downloads the latest LSA version from Broadcom
+- Added support for manual version override via `LSA_VERSION` build argument
 
 ### 4/30/2025
 - Fixed a bug reported in [#5](https://github.com/MeCJay12/lsi-storage-authority/issues/5) where email alerts were set with no body contents.
