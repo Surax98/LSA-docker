@@ -12,7 +12,7 @@ The build process supports three methods for determining which LSA version to do
 To automatically detect the latest version from Broadcom's JavaScript-rendered download page, enable Selenium:
 
 ```bash
-docker build --build-arg USE_SELENIUM=true -t <IMAGE_TAG> .
+docker build -t <IMAGE_TAG> .
 ```
 
 The version format should match Broadcom's naming convention: `XXX.XXX.XXX.XXX_MRXX.XX`
